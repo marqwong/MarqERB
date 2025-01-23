@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Breadcrumb -->
+<section id="bc" class="mt-3">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href={% url 'index' %}> <i class="fas fa-home"></i> Home</a>
+        </li>
+        <li class="breadcrumb-item active">Press</li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about" class="py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="bg-dark text-warning p-3 mb-4">
+          <h2 class="mb-0">New Menu</h2>
+        </div>
+        <img src={% static 'img/press1.jpg' %} alt="" />
+        <p class="mt-4">
+          To elevate the celebration and foster meaningful connections, consider partaking in the traditional Singaporean and Malaysian dish, Prosperity "Lo Hei." Each toss of the dish symbolizes the invitation of abundant fortune and sets a positive tone, paving the way for a successful year ahead.
+        </p>
+
+        <!-- Add Make An Inquiry button to open the user's email client -->
+        <a
+          href="mailto:service@mtable.rest?subject=Inquiry from M-Table Website&body=Dear M-Table Team,"
+          class="btn btn-dark text-warning btn-block btn-lg rounded"
+        >
+          Make An Inquiry
+        </a>
+        <br>
+
+        <img src={% static 'img/press5.jpg' %} alt="" />
+        <p class="mt-4">
+        <h5>THEMATIC PANDA FUFU AFTERNOON TEA  (HongKong)</h5>  
+        <p>Relish the delightful themed afternoon tea for our Hongkong customers, and revel in a one-of -a-kind experience with our adorable Panda Fufu at our Hongkong Lounge.</p>
+        </p>
+
+        <!-- Add Make An Inquiry button to open the user's email client -->
+        <a
+          href="mailto:service@mtable.rest?subject=Inquiry from M-Table Website&body=Dear M-Table Team,"
+          class="btn btn-dark text-warning btn-block btn-lg rounded"
+        >
+          Make An Inquiry
+        </a>
+
+        <br>
+        <img src={% static 'img/press3.jpg' %} alt="" />
+        <p class="mt-4">
+            <h5> SINGAPORE CLASSIC CUISINE WITH CHARMING KEYCHAINS (Shanghai)</h5>  
+            <p> Indulge in the authentic flavours of Singapore with Satay Inn Family Platter or Singapore Combo Delights and enjoy a complimentary adorable keychain!</p>
+        </p>
+     
+        <!-- Add Make An Inquiry button to open the user's email client -->
+        <a
+          href="mailto:service@mtable.rest?subject=Inquiry from M-Table Website&body=Dear M-Table Team,"
+          class="btn btn-dark text-warning btn-block btn-lg rounded"
+        >
+          Make An Inquiry
+        </a>
+        <br>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

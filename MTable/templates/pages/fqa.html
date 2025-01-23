@@ -1,0 +1,195 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Breadcrumb -->
+<section id="bc" class="mt-3">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href={% url 'index' %}> <i class="fas fa-home"></i> Home</a>
+        </li>
+        <li class="breadcrumb-item active">FAQ</li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about" class="py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="bg-dark text-warning p-3 mb-4">
+          <h2 class="mb-0">Frequently Asked Questions</h2>
+        </div>
+        <img src={% static "img/press4.jpg" %} alt="" />
+
+        <!-- FAQ Section -->
+        <!-- Modified Date: 2025-01-16 -->
+        <!-- Modified Content: Wrapped each Q&A pair in a .faq-item container and added specific class names for questions and answers -->
+        <div class="faq-item">
+          <div class="faq-question">
+            <h5>Q: What sort of restaurants are in the hotel?</h5>
+            <span class="arrow">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>A: We offer French and other Western-style cuisines, buffets, teppanyaki, sushi, tempura, and Chinese cuisine.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h5>Q: Do your restaurants allow children?</h5>
+            <span class="arrow">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>A: Some of our restaurants have restrictions on children, depending on the time of day and their age.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+              <h5>Q: What sort of restaurants are in the hotel?</h5>
+              <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+              <p>A: We offer French and other Western-style cuisines, buffets, teppanyaki, sushi, tempura, and Chinese cuisine.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <h5>Q: Do any of your restaurants allow smoking?</h5>
+              <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+              <p>A: All restaurants, bars, lounges and banquet halls (including waiting rooms and lobbies) on the premises are non-smoking.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <h5>Q: Which restaurants accept reservations?</h5>
+              <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+              <p>A: All the restaurants we listed are accept reservation.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <h5>Q: Do I need to reserve a restaurant in advance?</h5>
+              <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+              <p>A: If you already know the date and time you intend to visit us, we recommend advance reservations.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <h5>Q: Is there a dress code?</h5>
+              <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+              <p>A: Dress codes are different at each establishment, and we do suggest you confirm directly with the restaurant of your choice for details.
+                Gentlemen are requested to wear a jacket in the Main Dining Room, Les Saisons.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+          <h5>Q: We would like to celebrate a special event. Can we book flowers or cakes?</h5>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="faq-answer">
+          <p>A: We welcome your requests. Please inform us when you place your reservations.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+      <h5>Q: Are you able to accommodate food allergies or other dietary restrictions?</h5>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="faq-answer">
+      <p>A: We do our very best to meet individual needs. Please inform us when you place your reservations.</p>
+    </div>
+  </div>
+
+        <div class="faq-item">
+        <div class="faq-question">
+  <h5>Q: Do you offer vegan or halal menu?</h5>
+  <span class="arrow">▼</span>
+</div>
+<div class="faq-answer">
+  <p>A: VEGAN:We offer vegan menus at some of our restaurants.</p>
+  <p>We can prepare dishes without alcohol, pork, or lard.</p>
+  <p>Halal meat may also be available upon request, so please contact us in advance.</p>
+</div>
+</div>
+
+<div class="faq-item">
+    <div class="faq-question">
+<h5>Q: Do you have children's menus?</h5>
+<span class="arrow">▼</span>
+</div>
+<div class="faq-answer">
+<p>A: We have no special children's menus, but please inquire when making reservations regarding options.</p>
+</div>
+</div>
+
+        <!-- Add other Q&A pairs in the same format -->
+      </div>
+
+      <div class="col-md-4">
+        {% if mvp_realtors %}
+          {% for mvp_realtor in mvp_realtors %}
+            <div class="card">
+              <img class="card-img-top" src={{ mvp_realtor.photo.url }} alt="Seller of the month" />
+              <div class="card-body">
+                <h5 class="card-title">Chef Star</h5>
+                <h6 class="text-secondary">{{ mvp_realtor.name }}</h6>
+                <p class="card-text">{{ mvp_realtor.description }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          <div class="card">
+            <p>No Chef Star of The Month</p>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modified Date: 2025-01-16 -->
+<!-- Modified Content: Added JavaScript directly to the HTML template -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    console.log('JavaScript loaded'); // Confirm JavaScript is loaded
+
+    // Get all FAQ items
+    const faqItems = document.querySelectorAll('.faq-item');
+    console.log(`Found ${faqItems.length} FAQ items`); // Confirm the number of FAQ items found
+
+    // Loop through each FAQ item
+    faqItems.forEach((item) => {
+      // Get the question part
+      const question = item.querySelector('.faq-question');
+
+      // Add click event to the question part
+      question.addEventListener('click', () => {
+        console.log('FAQ item clicked'); // Confirm click event is triggered
+        // Toggle the active class to control the visibility of the answer
+        item.classList.toggle('active');
+      });
+    });
+  });
+</script>
+
+{% endblock %}

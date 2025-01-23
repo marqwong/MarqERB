@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href={% static "css/all.css" %} />
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href={% static "css/bootstrap.css" %} />
+    <!-- Custom -->
+    <link rel="stylesheet" href={% static "css/style.css" %} />
+    <!-- lightbox-->
+    <link rel="stylesheet" href={% static "css/lightbox.min.css" %} />
+    <!--FonAwesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>M-Table Premium</title>
+    <style>
+      /* Reset browser default styles */
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
+    </style>
+  </head>
+
+  <!-- Set body as a Flexbox container and ensure it takes up the full viewport height -->
+  <body class="d-flex flex-column min-vh-100">
+    <!-- Topbar -->
+    {% include 'partials/_topbar.html' %}
+
+    <!-- Navbar -->
+    {% include 'partials/_navbar.html' %}
+
+    <!-- Main Content -->
+    <main class="flex-grow-1"> <!-- Ensure main area fills remaining space -->
+      {% block content  %} {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-auto"> <!-- Ensure footer is fixed at the bottom -->
+      {% include 'partials/_footer.html' %}
+    </footer>
+
+    <!-- Scripts -->
+    <script src={% static "js/jquery-3.3.1.min.js" %}> </script>
+    <script src={% static "js/bootstrap.bundle.min.js" %}></script>
+    <script src={% static "js/main.js" %}></script>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+    <script src={% static "js/lightbox.min.js" %}></script>
+  </body>
+</html>

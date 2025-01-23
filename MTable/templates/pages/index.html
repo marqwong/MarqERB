@@ -1,0 +1,356 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+<!-- Custom CSS Styles -->
+<style>
+  /* Rounded corners for images */
+  #listings .card-img-top {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+  }
+
+  /* Service section background color */
+  #services {
+    background-color: #1a1a1a; /* Black background */
+    padding: 80px 0;
+  }
+
+  /* Gold icons and text */
+  #services i {
+    color: #d4af37; /* Gold */
+  }
+
+  #services h3,
+  #services p {
+    color: white; /* White text */
+  }
+
+  /* Service card styling */
+  #services .card {
+    background-color: #1a1a1a; /* Black background */
+    border: 2px solid #d4af37; /* Gold border */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  #services .card:hover {
+    transform: translateY(-10px); /* Move up on hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Shadow on hover */
+  }
+
+  /* Quintessentially-style buttons */
+  #showcase .btn,
+  #listings .btn-primary {
+    background-color: #1a1a1a; /* Black background */
+    color: white; /* White text */
+    border: 2px solid #d4af37; /* Gold border */
+    border-radius: 0; /* Sharp corners */
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase; /* Uppercase text */
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  #showcase .btn:hover,
+  #listings .btn-primary:hover {
+    background-color: #d4af37; /* Gold background */
+    color: #1a1a1a; /* Black text */
+    border-color: #1a1a1a; /* Black border */
+  }
+
+  /* Price tag corner style */
+  .price-corner {
+    position: absolute; /* Absolute positioning */
+    top: 10px; /* Distance from top */
+    left: 10px; /* Distance from left */
+    background-color: #1a1a1a; /* Black background */
+    color: #d4af37; /* Gold text */
+    border: 2px solid #d4af37; /* Gold border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 5px 10px; /* Padding */
+    font-size: 0.9rem; /* Font size */
+    font-weight: bold; /* Bold text */
+    text-transform: uppercase; /* Uppercase text */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Shadow effect */
+    z-index: 1; /* Ensure it's on top */
+  }
+</style>
+
+<!-- Popup Video -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Concierge Popup</title>
+    <style>
+        /* Popup styling */
+        .popup {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000; /* Ensure popup is on top */
+        }
+        .popup-content {
+            background: #000; /* Black background */
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .popup-content h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #D4AF37; /* Gold */
+        }
+        .popup-content video {
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            border-radius: 10px;
+            outline: none; /* Remove video outline */
+        }
+        .popup-content .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1001; /* Ensure close button is on top */
+        }
+    </style>
+</head>
+<body>
+    <!-- Popup -->
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <h1>Your Gateway to M-Table Luxury</h1>
+            <video autoplay muted loop>
+                <source src="{% static 'img/popupvedio.mp4' %}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+    <script>
+        // Show popup on page load
+        window.onload = function() {
+            document.getElementById('popup').style.display = 'flex';
+
+            // Automatically close popup after 12 seconds
+            setTimeout(function() {
+                closePopup();
+            }, 12000); // 12000 milliseconds = 12 seconds
+        };
+
+        // Close popup
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
+
+<!-- Showcase -->
+<section id="showcase">
+  <div class="container text-center">
+    <div class="home-search p-5">
+      <div class="overlay p-5">
+        <h1 class="display-4 mb-4" style="color: #D4AF37;">M-Table Reservation</h1>
+        <p class="lead">
+          M-Table Club provides the global premium customized comercial social event service！
+        </p>
+        <div class="search">
+          <form action="{% url 'search' %}" method="GET">
+            <!-- Form Row 1: Location and Price -->
+            <div class="form-row">
+              <!-- Location Search -->
+              <div class="col-md-6 mb-3">
+                <label class="sr-only">Location</label>
+                <select name="district" class="form-control">
+                  <option selected="true" disabled="disabled">
+                    Location (Select)
+                  </option>
+                  {% for key, value in district_choices.items %}
+                  <option value="{{ key }}" {% if key == values.district %}selected{% endif %}>
+                    {{ value }}
+                  </option>
+                  {% endfor %}
+                </select>
+              </div>
+
+              <!-- Price Search -->
+              <div class="col-md-6 mb-3">
+                <select name="price" class="form-control">
+                  <option selected="true" disabled="disabled">
+                    Cost (Select)
+                  </option>
+                  {% for key, value in price_choices.items %}
+                  <option value="{{ key }}" {% if key == values.price %}selected{% endif %}>
+                    {{ value }}
+                  </option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+
+            <!-- Form Row 2: Keyword -->
+            <div class="form-row">
+              <div class="col-md-12 mb-3">
+                <label class="sr-only">Keywords</label>
+                <input
+                  type="text"
+                  name="keywords"
+                  class="form-control"
+                  placeholder="Keyword (Band, Guest, etc)"
+                  value="{{ values.keywords }}" /> <!-- Retain user input for keywords -->
+
+              </div>
+            </div>
+
+            <!-- Hidden Fields for Title and Tables (Default to Empty) -->
+            <input type="hidden" name="title" value="">
+            <input type="hidden" name="bedrooms" value="">
+
+            <!-- Modified Submit button to black and gold style -->
+            <button class="btn btn-block mt-4" type="submit">
+              Search
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Listings -->
+<section id="listings" class="py-5">
+  <div class="container">
+    <h3 class="text-center mb-3">Latest Offering</h3>
+    <div class="row">
+      {% if listings %}
+        {% for listing in listings %}
+          <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card listing-preview">
+              <img class="card-img-top" src="{{ listing.photo_main.url }}" alt="{{ listing.title }}">
+              <!-- Modified price tag -->
+              <div class="price-corner">${{ listing.price|intcomma }}</div>
+              <div class="card-body">
+                <div class="listing-heading text-center">
+                  <h4 class="text-primary">{{ listing.title | title }}</h4>
+                  <p>
+                    <i class="fas fa-map-marker text-secondary"></i>{{ listing.get_district_display }}
+                  </p>
+                </div>
+                <hr />
+                <div class="row py-2">
+                  <div class="col-6">
+                    <i class="fas fa-th-large" style="color: #001F3F;"></i> 
+                    <span style="color: #001F3F;">Scale:</span> 
+                    <span style="color: #001F3F;">{{ listing.sqft|intcomma }}</span>
+                  </div>
+                  <div class="col-6">
+                    <i class="fa-solid fa-chair" style="color: #001F3F;"></i> 
+                    <span style="color: #001F3F;">Seat:</span> 
+                    <span style="color: #001F3F;">{{ listing.clubhouse }}</span>
+                  </div>
+                </div>
+                <div class="row py-2">
+                  <div class="col-6">
+                    <i class="fa-solid fa-music" style="color: #001F3F;"></i> 
+                    <span style="color: #001F3F;">Band:</span> 
+                    <span style="color: #001F3F;">{{ listing.bedrooms }}</span>
+                  </div>
+                  <div class="col-6">
+                    <i class="fa-solid fa-user" style="color: #001F3F;"></i> 
+                    <span style="color: #001F3F;">Guest:</span> 
+                    <span style="color: #001F3F;">{{ listing.bathrooms }}</span>
+                  </div>
+                </div>
+                <hr />
+                <div class="row py-2">
+                  <div class="col-12">
+                    <i class="fa-solid fa-chess-pawn" style="color: #001F3F;"></i> 
+                    <span style="color: #001F3F;">{{ listing.realtor.name }}</span>
+                  </div>
+                </div>
+                <div class="row pb-2">
+                  <div class="col-6">
+                    <i class="fas fa-clock" style="color: #001F3F;"></i> 
+                    <span style="color: #001F3F;">{{ listing.list_date|timesince }}</span>
+                  </div>
+                </div>
+                <hr />
+                <!-- Modified More Info button -->
+                <a href="{% url 'listing' listing.id %}" class="btn btn-primary btn-block">More Info</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="col-12 text-center">
+          <h2>No Lists Available</h2>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<!-- Service -->
+<section id="services" class="py-5">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <i class="fa-solid fa-landmark fa-4x"></i>
+          <hr />
+          <h3>Premium Experience</h3>
+          <p>
+            Experience exquisite cuisine and elegant ambiance at M-Table Club, where personalized service and a curated menu await.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <i class="fa-solid fa-globe fa-4x"></i>
+          <hr />
+          <h3>Mystery Guest Appears</h3>
+          <p>
+            Each event features a unique Mystery Guest from top industries, offering exciting networking opportunities with influential figures.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <i class="fa-solid fa-mug-saucer fa-4x"></i>
+          <hr />
+          <h3>Customized Services</h3>
+          <p>
+            We provide tailored services for private dining and corporate events, ensuring every detail is planned for unforgettable experiences.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

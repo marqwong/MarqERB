@@ -1,0 +1,55 @@
+{% extends 'base.html' %} 
+{% block content %}
+<!-- Add flex-grow-1 and min-height to ensure the section fills the remaining space -->
+<section id="login" class="bg-light py-5 flex-grow-1 d-flex align-items-center min-vh-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <div class="card">
+                    <!-- Modified Date: 2025-01-18 -->
+                    <!-- Modified Content: Changed the header style to black and gold -->
+                    <div class="card-header bg-dark text-warning">
+                        <h4><i class="fas fa-sign-in-alt"></i> SignIn</h4>
+                    </div>
+                    <div class="card-body">
+                        <!-- Include the alert message section -->
+                        {% include 'partials/_alert.html' %}
+                        <form action="{% url 'login' %}" method="POST">
+                            {% csrf_token %}
+                            <!-- Username Input -->
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input
+                                    type="text"
+                                    name="username"
+                                    class="form-control"
+                                    required
+                                />
+                            </div>
+
+                            <!-- Password Input -->
+                            <div class="form-group">
+                                <label for="password2">Password</label>
+                                <input
+                                    type="password"
+                                    name="password"
+                                    class="form-control"
+                                    required
+                                />
+                            </div>
+
+                            <!-- Modified Date: 2025-01-18 -->
+                            <!-- Modified Content: Changed the Login button to black and gold style and increased its size -->
+                            <input
+                                type="submit"
+                                value="Enter"
+                                class="btn btn-dark text-warning btn-block btn-lg"
+                            />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

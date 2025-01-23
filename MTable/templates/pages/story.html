@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Breadcrumb -->
+<section id="bc" class="mt-3">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href={% url 'index' %}> <i class="fas fa-home"></i> Home</a>
+        </li>
+        <li class="breadcrumb-item active">Our Story</li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about" class="py-4">
+  <div class="container">
+    <div class="row">
+      <!-- Modified Content: Changed col-md-8 to col-md-12 to make the content span the full width of the container -->
+      <div class="col-md-12">
+            <!-- Modified Content: Added primary background color to the Join Us title and made it span the full width -->
+            <div class="bg-dark text-warning p-3 mb-4">
+              <h2 class="mb-0">Our Story</h2>
+            </div>
+        <p class="lead">
+          The Dream of Elite Banquets
+        </p>
+        <img src={% static "img/story.png" %} alt="" class="img-fluid" />
+        <p>On a starry night, Susur Lee sat at his favorite French restaurant, a glass of aromatic red wine in hand, reminiscing about his days as a top chef. Over the years, he had hosted countless heads of state and social elites from around the world. These experiences provided him with a profound understanding of the fusion of fine dining and social interaction. Each meticulously prepared banquet was a perfect expression of his artistry and interpersonal skills.</p>
+        <img src={% static "img/story1.png" %} alt="" class="img-fluid" />
+        <p>As time passed, Susur Lee gradually realized that while his culinary skills were impeccable, he yearned to create a more impactful business model that could combine high-end cuisine with unique social experiences. He believed the world needed a platform where top talents from various fields could gather, share ideas, build connections, and collaboratively create new opportunities. Thus, he decided to establish a company focused on personalized elite banquets, allowing each guest to enjoy a distinctive dining experience.</p>
+        <img src={% static "img/story2.png" %} alt="" class="img-fluid" />
+        <p>Henry’s business positioning was crystal clear: he aimed to attract top figures from politics, business, finance, entertainment, and sports, providing them with exclusive banquet services. His company not only offered personalized services from top chefs but also invited mystery guests to attend, along with high-caliber bands and hosts, making every banquet an unforgettable event. This unique business model attracted many high-end clients eager to forge connections and collaborations in such social settings.</p>
+        <img src={% static "img/story3.png" %} alt="" class="img-fluid" />
+        <p>At the inception of his company, Susur Lee faced numerous challenges. He needed to find suitable venues, assemble a talented team of chefs, and attract high-profile guests. To realize his dream, he began searching for partners and leveraged his extensive network within the industry to gradually build a strong team. Planning each banquet required meticulous consideration; from menu design to venue decoration, every detail was crucial.</p>
+        <img src={% static "img/story4.png" %} alt="" class="img-fluid" />
+        <p>As the business developed, Henry’s company gradually became synonymous with elite banquets worldwide. His events were not merely dining occasions; they were stages for intellectual exchanges, allowing people from diverse backgrounds to connect and collaborate. Each banquet brimmed with creativity and inspiration, and many business partnerships and friendships were forged in such an environment.</p>
+        <img src={% static "img/story5.png" %} alt="" class="img-fluid" />
+        <p>The commercial value of Susur Lee's endeavors extended beyond financial gains; it lay in the social network and connections he cultivated. Many entrepreneurs and leaders regarded attending Susur Lee's banquets as an honor, as it provided not just a moment to enjoy exquisite cuisine but also a golden opportunity to establish vital connections.</p>
+        <br>
+        <p>Today, Susur Lee’s dream has come true; his company is not just a culinary haven but also a bridge for business networking, allowing every participant to find inspiration in the cuisine and build valuable relationships. At these banquets, guests not only savor delicious dishes but also engage in deep conversations with elites from various fields—this is precisely the goal Susur Lee has pursued.</p>
+        <img src={% static "img/story.jpg" %} alt="" class="img-fluid" />
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+<!-- Add custom styles -->
+<style>
+  /* Black and gold style button */
+  .btn-black-gold {
+    background-color: black; /* Black background */
+    color: gold; /* Gold text */
+    border: 1px solid gold; /* Gold border */
+  }
+
+  /* Black and gold style price badge */
+  .badge-black-gold {
+    background-color: black; /* Black background */
+    color: gold; /* Gold text */
+    border: 1px solid gold; /* Gold border */
+  }
+</style>
+
+<section id="showcase-inner" class="showcase-search text-white py-5">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-12">
+        <form action="{% url 'search' %}">
+          <!-- Form Row 1: Location and Price -->
+          <div class="form-row">
+            <!-- Location Search -->
+            <div class="col-md-6 mb-3">
+              <label class="sr-only">Location</label>
+              <select name="district" class="form-control">
+                <option selected="true" disabled="disabled">
+                  Location (Select)
+                </option>
+                {% for key, value in district_choices.items %}
+                <option value="{{ key }}" {% if key == values.district %}selected{% endif %}>
+                  {{ value }}
+                </option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <!-- Price Search -->
+            <div class="col-md-6 mb-3">
+              <select name="price" class="form-control">
+                <option selected="true" disabled="disabled">
+                  Cost (Select)
+                </option>
+                {% for key, value in price_choices.items %}
+                <option value="{{ key }}" {% if key == values.price %}selected{% endif %}>
+                  {{ value }}
+                </option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+
+          <!-- Form Row 2: Keyword -->
+          <div class="form-row">
+            <div class="col-md-12 mb-3">
+              <label class="sr-only">Keywords</label>
+              <input
+                type="text"
+                name="keywords"
+                class="form-control"
+                placeholder="Keyword (Band, Guest, etc)"
+                value="{{ values.keywords }}"/>  <!-- Retain user input for keywords -->
+              
+            </div>
+          </div>
+
+          <!-- Hidden Fields for Title and Tables (Default to Empty) -->
+          <input type="hidden" name="title" value="">
+          <input type="hidden" name="bedrooms" value="">
+
+          <!-- Modified Submit button to black and gold style -->
+          <button class="btn btn-black-gold btn-block mt-4" type="submit">
+            Submit form
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Listings -->
+  <section id="listings" class="py-4">
+    <div class="container">
+      <div class="row">
+        {% if listings %}
+        {% for listing in listings %}
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card listing-preview">
+            <img
+              class="card-img-top"
+              src="{{ listing.photo_main.url }}"
+              alt=""
+            />
+            <div class="card-img-overlay">
+              <h2>
+                <!-- Modified price badge to black and gold style -->
+                <span class="badge badge-black-gold">${{ listing.price|intcomma }}</span>
+              </h2>
+            </div>
+            <div class="card-body">
+              <div class="listing-heading text-center">
+                <h4 class="text-primary">{{listing.title | title}}</h4>
+                <p>
+                  <i class="fas fa-map-marker text-secondary"></i>{{listing.get_district_display}}
+                </p>
+              </div>
+              <hr />
+              <div class="row py-2">
+                <div class="col-6">
+                  <i class="fas fa-th-large" style="color: #001F3F;"></i> 
+                  <span style="color: #001F3F;">Scale:</span> 
+                  <span style="color: #001F3F;">{{ listing.sqft|intcomma }}</span>
+                </div>
+                <div class="col-6">
+                  <i class="fa-solid fa-chair" style="color: #001F3F;"></i> 
+                  <span style="color: #001F3F;">Seat:</span> 
+                  <span style="color: #001F3F;">{{ listing.clubhouse }}</span>
+                </div>
+              </div>
+              <div class="row py-2">
+                <div class="col-6">
+                  <i class="fa-solid fa-music" style="color: #001F3F;"></i> 
+                  <span style="color: #001F3F;">Band:</span> 
+                  <span style="color: #001F3F;">{{ listing.bedrooms }}</span>
+                </div>
+                <div class="col-6">
+                  <i class="fa-solid fa-user" style="color: #001F3F;"></i> 
+                  <span style="color: #001F3F;">Guest:</span> 
+                  <span style="color: #001F3F;">{{ listing.bathrooms }}</span>
+                </div>
+              </div>
+              <hr />
+              <div class="row py-2">
+                <div class="col-12">
+                  <i class="fa-solid fa-chess-pawn" style="color: #001F3F;"></i> 
+                  <span style="color: #001F3F;">{{ listing.realtor.name }}</span>
+                </div>
+              </div>
+              <div class="row pb-2">
+                <div class="col-6">
+                  <i class="fas fa-clock" style="color: #001F3F;"></i> 
+                  <span style="color: #001F3F;">{{ listing.list_date|timesince }}</span>
+                </div>
+              </div>
+              <hr />
+              <!-- Modified More Info button to black and gold style -->
+              <a href="{% url 'listing' listing.id %}" class="btn btn-black-gold btn-block"
+                >More Info</a
+              >
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="col-md-12">
+        <p>No Branches found</p>
+        </div>
+        {% endif%}
+
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

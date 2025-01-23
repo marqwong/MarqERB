@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Breadcrumb -->
+<section id="bc" class="mt-3">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href={% url 'index' %}> <i class="fas fa-home"></i> Home</a>
+        </li>
+        <li class="breadcrumb-item active">Mystery Guest</li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about" class="py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="bg-dark text-warning p-3 mb-4">
+          <h2 class="mb-0">Mystery Guests</h2>
+        </div>
+        <p class="lead">
+            We will invite mysterious guests from various sectors for our guests, all of whom are top performers in their respective industries.
+        </p>
+        <img src={% static "img/guesta.jpg" %} alt="" />
+        <p class="mt-4">
+            Our guest types include top experts from academia, the political sphere, the professional field, technology, the arts, and finance. They will attend our guests' banquet as mysterious guests and will be introduced to our guests for networking opportunities to help them expand their connections.
+        </p>
+        <img src={% static "img/guestb.jpg" %} alt="" />
+        <p class="mt-4">
+            In addition to being honored guests, they will also serve as potential private advisors and partners for our guests, helping to solve problems and advance their businesses.
+        </p>
+        <img src={% static "img/guestc.jpg" %} alt="" />
+        <p class="mt-4">
+            As professional intermediaries, we will serve as a bridge between guests and hosts, arranging personalized events and customizing collaboration service terms, as well as providing private secretarial and simultaneous translation services.
+        </p>
+    </div>
+    <div class="col-md-4">
+      {% if mvp_realtors %}
+      {% for mvp_realtor in mvp_realtors %}
+      <div class="card">
+        <img
+          class="card-img-top"
+          src={{ mvp_realtor.photo.url }}
+          alt="Seller of the month"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Chef Star</h5>
+          <h6 class="text-secondary">{{ mvp_realtor.name }}</h6>
+          <p class="card-text">
+            {{ mvp_realtor.description }}
+          </p>
+        </div>
+      </div>
+      {% endfor %}
+      {% else %}
+      <div class="card">
+        <p>No Chef Star of The Month</p>
+      </div>              
+      {% endif %}
+    </div>
+  </div>
+</div>
+</section>
+
+{% endblock %}

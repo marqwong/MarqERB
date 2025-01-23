@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Breadcrumb -->
+<section id="bc" class="mt-3">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href={% url 'index' %}> <i class="fas fa-home"></i> Home</a>
+        </li>
+        <li class="breadcrumb-item active">About</li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about" class="py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="bg-dark text-warning p-3 mb-4">
+          <h2 class="mb-0">About Our Team</h2>
+        </div>
+        <p>Team IntroductionOur team is a unique blend of top-tier chefs and seasoned business professionals, dedicated to creat
+          <img src={% static "img/about2.jpg" %} alt="" />
+        <p>We cater to a discerning clientele who seek not only exquisite dining experiences but also the opportunity to connect with influential figures. Our services are tailored for those who understand the value of networking and the power of building relationships in today’s competitive landscape. Whether you are hosting a corporate event, a private gathering, or a charity auction, we provide an exclusive platform where guests can engage with industry leaders, innovators, and visionaries. Our commitment to excellence ensures that every interaction is meaningful, fostering connections that can lead to new opportunities and collaborations.</p>
+        <img src={% static "img/about3.jpg" %} alt="" />
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Work -->
+<section id="work" class="bg-dark text-white text-center">
+  <h2 class="display-4">We serve for you</h2>
+  <h4>
+    Our management team and culinary stars are among the best in the industry!
+  </h4>
+  <hr />
+  <a href={% url 'listings' %} class="btn btn-dark text-warning btn-lg border-warning">
+    View Branches
+  </a>
+</section>
+
+<!-- Team -->
+<section id="team" class="py-5">
+    <div class="container">
+      <h2 class="text-center">Our Team</h2>
+      <div class="row text-center">
+        {% if realtors %}
+        {% for realtor in realtors %}
+        <div class="col-md-4">
+          <img
+            src={{realtor.photo.url}}
+            alt=""
+            class="rounded-circle mb-3"
+          />
+          <h4 class="text-warning">{{ realtor.name }}</h4>
+          <p class="bg-dark text-white border-warning p-2">
+            <i class="fas fa-award text-white mb-3"></i> Head Chef
+          </p>
+          <hr />
+          <p><i class="fas fa-phone"></i> {{realtor.phone}}</p>
+          <p><i class="fas fa-envelope-open"></i> {{realtor.email}}</p>
+        </div>
+        {% endfor %}
+        {% else %}
+         <div class="col-md-12">
+          <p>No Chef Available</p>
+         </div>
+         {% endif %}
+      </div>
+    </div>
+  </section>
+
+{% endblock %}
