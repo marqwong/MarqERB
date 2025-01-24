@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'bcre.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'testdb4',
+        'NAME': 'testdb5',
         'USER': 'postgres',
         "PASSWORD" : '5678',
         "HOST" : 'localhost'
